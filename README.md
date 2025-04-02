@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/e3f9ce54-ff9e-481f-88d8-ee94e6e63934)Critérios de avaliação
+Critérios de avaliação
 [] Simplicidade
  Ortogonalidade
 [] Tipos de dados
