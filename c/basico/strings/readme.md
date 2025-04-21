@@ -18,7 +18,6 @@ strings/
 ```
 
 ## Como compilar e executar
-Para compilar o projeto, utilize o comando abaixo:
 ```bash
 make
 ```

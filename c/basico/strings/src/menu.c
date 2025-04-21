@@ -31,7 +31,7 @@ void showMenu() {
             while (getchar() != '\n');
             continue;
         }
-        getchar(); // limpa o buffer
+        getchar();
 
         switch (opcao) {
             case 1:
