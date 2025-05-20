@@ -1,12 +1,10 @@
 class Pocao:
-    """Classe genérica para poções de Cura, Veneno ou Reviver."""
     def __init__(self, tipo: str, potencia: int):
         self.tipo = tipo.title()
         self.potencia = potencia
 
 
 class Personagem:
-    """Representa um personagem com nome, saúde e estado de vida."""
     def __init__(self, nome: str):
         self.nome = nome
         self.saude = 5
@@ -36,7 +34,7 @@ class Personagem:
                       """)
             return
 
-        # Bloqueia outras poções se estiver morto
+        # Bloquei outras poções se estiver morto
         if not self.vivo:
             print(f"{self.nome} está morto e não pode usar poções.")
             return
@@ -78,8 +76,7 @@ class Personagem:
                 print(f"{self.nome} usou poção de {pocao.tipo} e recebeu {dano} de dano (saúde: {self.saude}).")
 
 
-def mostrar_menu() -> None:
-    """Exibe o menu principal do jogo."""
+def menu() -> None:
     print(r"""
 +===========================================+
 |               MENU DO JOGO                |
@@ -133,6 +130,6 @@ if __name__ == "__main__":
 
     rodando = True
     while rodando:
-        mostrar_menu()
+        menu()
         escolha = input("Escolha uma opção (1-5): ")
         rodando = processar_escolha(escolha, p1, pocao_cura, pocao_veneno, pocao_reviver)
