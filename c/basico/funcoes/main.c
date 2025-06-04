@@ -1,7 +1,7 @@
 
 // [] Programação estruturada: Quais problemas resolve?
 
-// [] função main (com e sem argumentos, quaantos e quais?)
+// [] função main (com e sem argumentos, quantos e quais?)
 
 
 // [] funções Void e Tipos de retorno (EXIT_SUCCESS / EXIT_FAILURE)
