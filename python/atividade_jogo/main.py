@@ -58,7 +58,7 @@ class PersonagemGame:
 
     def usar_item(self, item: str) -> bool:
         if self.inventario.remover_item(item):
-            cura = 20  # cira fixa
+            cura = 20  # cura fixa
             self.vida += cura
             print(f"{self.nome} usou {item}, +{cura} vida (vida {self.vida})")
             return True
