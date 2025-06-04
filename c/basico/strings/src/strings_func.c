@@ -15,6 +15,11 @@ void lowercase(char *str) {
 }
 
 void trimSpaces(char *str) {
+    if (strlen(str) == 0) {
+        str[0] = '\0';
+        return;
+    }
+
     char *inicio = str;
     while (isspace((unsigned char)*inicio)) inicio++;
 
