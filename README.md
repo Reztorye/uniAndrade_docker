@@ -1,19 +1,19 @@
-# Crit\u00e9rios de avalia\u00e7\u00e3o
+# Critérios de avaliação
 - [ ] Simplicidade
-- Ortogonalidade
+- [ ] Ortogonalidade
 - [ ] Tipos de dados
 - [ ] Projeto de sintaxe
-- [ ] Suporte para abstra\u00e7\u00e3o
+- [ ] Suporte para abstração
 - [ ] Expressividade vc
-- [ ] Verifica\u00e7\u00e3o de tipos
-- [ ] Tratamento de exce\u00e7\u00f5es
+- [ ] Verificação de tipos
+- [ ] Tratamento de exceções
 - [ ] Apelidos restritos
 
 [ C, Python, Javascript ]
 
-### CRIT\u00c9RIOS DE ORTOGONALIDADE
+### CRITÉRIOS DE ORTOGONALIDADE
 - CONSIST\u00caNCIA / ESTRUTURAS DE DADOS
-  - [x] Declara\u00e7\u00e3o e atribui\u00e7\u00e3o de valores
+  - [x] Declaração e atribuição de valores
   - [x] Sobrecarga de operadores (+ - * / % and or not && || != !== == === )
   - [ ] Tipos primitivos (int, float, double, bool, null, void, undefined)
   - [ ] Convers\u00f5es impl\u00edcitas, truncamentos, arredondamentos
@@ -32,19 +32,19 @@
 
 CLASSES / OBJETOS
 
-- Consist\u00eancia na Cria\u00e7\u00e3o de Objetos
+- Consistencia na Criação de Objetos
 - Sobrecarga e Polimorfismo
-- Heran\u00e7a e Composi\u00e7\u00e3o
-- Metaclasses e Classes Din\u00e2micas
+- Herança e Composições
+- Metaclasses e Classes Dinâmicas
 IMPRIMIR VALORES (PRINT)
-VARI\u00c1VEIS
+VARIÁVEIS
 STRINGS
-TIPOS B\u00c1SICOS DE DADOS
-TIPOS AVAN\u00c7ADOS (ESTRUTURA DE DADOS)
-FUN\u00c7\u00d5ES
+TIPOS BÁSICOS DE DADOS
+TIPOS AVANÇADOS (ESTRUTURA DE DADOS)
+FUNÇÕES
 CLASSES / OBJETOS
 
-## REFER\u00caNCIAS
+## REFERÊNCIAS
 - https://quickref.me/c.html
 - https://media.licdn.com/dms/document/media/v2/D561FAQE2-VXHexGbQA/feedshare-document-pdf-analyzed/B56ZXBeyhfHsAc-/0/1742707840643?e=1743638400&v=beta&t=EL25j3y87O91dwEUbXGj0QL5T5dKgJEnQuTiKWBahpY
 - https://www.w3schools.com/c/c_data_types.php
