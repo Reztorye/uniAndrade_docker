@@ -1,27 +1,23 @@
-from abc import ABC, abstractmethod
+# jogadores/jogador.py
 
-class Jogador(ABC):
-    def __init__(self, nome: str, dano: int):
+class Jogador:
+    def __init__(self, nome, dano):
         self.nome = nome
         self.dano = dano
-        self.__saude = 100  # saúde encapsulada
+        self.saude = 100
+        self.saude_maxima = 100
+        # → Novo:
+        self.efeitos_ativos = []
 
-    @property
-    def saude(self) -> int:
-        return self.__saude
+    def adicionar_efeito(self, efeito):
+        self.efeitos_ativos.append(efeito)
 
-    @saude.setter
-    def saude(self, valor: int):
-        # Só altera saúde dentro de limites
-        self.__saude = max(0, min(100, valor))
+    def get_buff(self, effect_type):
+        return sum(e['value'] for e in self.efeitos_ativos if e['type'] == effect_type)
 
-    @abstractmethod
-    def atacar(self, alvo, dano):
-        """Ataca um alvo, recebendo o valor de dano a aplicar."""
-        pass
-
-
-    @abstractmethod
-    def defender(self, dano_recebido: int):
-        """Implementar defesa/mitigação específica."""
-        pass
+    def atualizar_efeitos(self):
+        for e in self.efeitos_ativos[:]:
+            e['remaining_turns'] -= 1
+            if e['remaining_turns'] <= 0:
+                self.efeitos_ativos.remove(e)
+                print(f"🔔 Efeito de {e['type']} expirou em {self.nome}!")

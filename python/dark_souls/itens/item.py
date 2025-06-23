@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-class Item(ABC):
-    def __init__(self, nome: str, tipo: str):
+class Item:
+    def __init__(self, nome, tipo):
         self.nome = nome
         self.tipo = tipo
 

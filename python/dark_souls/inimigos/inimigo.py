@@ -5,7 +5,7 @@ class Inimigo(ABC):
     def __init__(self, nome: str, dano: int):
         self.nome = nome
         self.dano = dano
-        self.__saude = 100  # encapsulada igual ao Jogador
+        self.__saude = 100
 
     @property
     def saude(self) -> int:
@@ -13,9 +13,10 @@ class Inimigo(ABC):
 
     @saude.setter
     def saude(self, valor: int):
-        self.__saude = max(0, self.__saude + valor)
+        # ⚠️ Aqui corrigido: atribui diretamente, não soma
+        self.__saude = max(0, valor)
 
     @abstractmethod
     def atacar(self, alvo):
-        """Implementar ataque específico que afeta `alvo.saude`."""
         pass
+

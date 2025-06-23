@@ -4,7 +4,7 @@ from .jogadores.arqueiro import Arqueiro
 from .inimigos.chefe import Chefe
 from .inimigos.morto_vivo import MortoVivo
 from .itens.arma import Arma
-from .itens.pocao import Pocao
+from .itens.pocao import Pocao, PocaoBuff
 
 def escolher_heroi():
     print("🔰 Escolha seu herói:")
@@ -16,20 +16,33 @@ def escolher_heroi():
     else:
         return Cavaleiro(nome="Artorias", dano=25, armadura=10, resistencia=5)
 
-def montar_inventario():
-    return [
-        Arma(nome="Espada Longa", dano=25, resistencia=100),
-        Pocao(nome="Poção de Vida", cura=50),
-        Pocao(nome="Poção Menor", cura=30),
-    ]
+def montar_inventario(heroi):
+    if isinstance(heroi, Cavaleiro):
+        return [
+            Arma("Espada Longa", dano=25, resistencia=100),
+            Pocao("Poção de Vida", cura=50),
+            PocaoBuff("Poção de Defesa", effect_type="defesa", value=0.5, duration=2),
+            PocaoBuff("Poção de Força",    effect_type="dano",   value=10,  duration=3),
+        ]
+    elif isinstance(heroi, Arqueiro):
+        return [
+            Arma("Arco Curto",    dano=20, resistencia=80),
+            Pocao("Poção de Vida", cura=50),
+            PocaoBuff("Poção de Defesa", effect_type="defesa", value=0.5, duration=2),
+            PocaoBuff("Poção de Força",    effect_type="dano",   value=10,  duration=3),
+        ]
+    else:
+        return [
+            Arma("Arma Genérica", dano=15, resistencia=50),
+            Pocao("Poção Genérica", cura=40)
+        ]
 
 def imprimir_menu():
     print("\n=== AÇÕES ===")
     print("1️⃣  Atacar")
     print("2️⃣  Defender")
     print("3️⃣  Usar Poção")
-    print("4️⃣  Ver Status")
-    print("5️⃣  Ver Inventário")
+    print("4️⃣  Ver Inventário")
     print("0️⃣  Sair")
 
 def usar_pocao(heroi, inventario):
@@ -48,10 +61,11 @@ def usar_pocao(heroi, inventario):
         print("❌ Escolha inválida.")
 
 def turno_heroi(heroi, inimigo, inventario):
-    opc = input("Ação: ").strip()
+    # If the user presses Enter or provides invalid input, the loop continues.
+    opc = input("Ação (pressione 0 para sair, Enter para continuar): ").strip()
     if opc == "1":
-        base = heroi.dano
-        var = random.uniform(0.9, 1.1)
+        base = heroi.dano + heroi.get_buff("dano")
+        var  = random.uniform(0.9, 1.1)
         dano = int(base * var)
         if random.random() < 0.1:
             dano *= 2
@@ -62,32 +76,36 @@ def turno_heroi(heroi, inimigo, inventario):
     elif opc == "3":
         usar_pocao(heroi, inventario)
     elif opc == "4":
-        print(f"🛡️ {heroi.nome} - Vida: {heroi.saude}")
-    elif opc == "5":
         print("🎒 Inventário:")
         for it in inventario:
             print(f"- {it.nome}")
     elif opc == "0":
         return False
     else:
-        print("❌ Opção inválida.")
+        print("❌ Opção inválida. Pressione Enter para tentar novamente ou 0 para sair.")
+    heroi.atualizar_efeitos()
+    print(f"💥 {inimigo.nome} agora tem {inimigo.saude} de HP!\n")
     return True
 
 def main():
-    heroi     = escolher_heroi()
-    inventario= montar_inventario()
-    inimigo   = Chefe(nome="Gwyn", dano=20, forca_especial=15)
+    heroi      = escolher_heroi()
+    inventario = montar_inventario(heroi)
+    inimigo    = Chefe(nome="Gwyn", dano=20, forca_especial=15)
 
     print(f"\nVocê é {heroi.nome} (Vida: {heroi.saude})")
     print(f"Enfrenta: {inimigo.nome} (HP: {inimigo.saude})\n")
 
     turno = 1
     ativo = True
-    while ativo and heroi.saude > 0 and inimigo.saude > 0:
+    while ativo and heroi.saude > 0:
         imprimir_menu()
         ativo = turno_heroi(heroi, inimigo, inventario)
-        if not ativo or inimigo.saude <= 0:
+        # se o usuário escolheu sair ou matou o inimigo, pula o turno inimigo
+        if not ativo:
             break
+        if inimigo.saude <= 0:
+            print("🏆 Parabéns, você derrotou o chefe!")
+            return
 
         print(f"\n--- Turno do {inimigo.nome} (#{turno}) ---")
         if turno % 3 == 0:
@@ -96,13 +114,14 @@ def main():
             inimigo.atacar(heroi)
         turno += 1
 
-    print()
-    if inimigo.saude <= 0:
-        print("🏆 Parabéns, você derrotou o chefe!")
-    elif heroi.saude <= 0:
+    # após sair do loop, checa resultado final
+    if heroi.saude <= 0:
         print("💀 Você foi derrotado... Tente de novo!")
+    elif inimigo.saude <= 0:
+        print("🏆 Parabéns, você derrotou o chefe!")
     else:
         print("👋 Saindo do jogo!")
+    
 
 if __name__ == "__main__":
     main()
