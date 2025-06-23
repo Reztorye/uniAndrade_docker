@@ -1,0 +1,5 @@
+
+from .cavaleiro import Cavaleiro
+from .jogador import Jogador
+
+__all__ = ['Cavaleiro']
