@@ -1,3 +1,4 @@
+# inimigos/chefe.py
 from .inimigo import Inimigo
 
 class Chefe(Inimigo):
@@ -5,12 +6,16 @@ class Chefe(Inimigo):
         super().__init__(nome, dano)
         self.forca_especial = forca_especial
 
-    def atacar(self, alvo):
-        # ex.: alvo deve possuir propriedade saude
-        alvo.saude -= self.dano
-        print(f"{self.nome} ataca ferozmente e causa {self.dano} de dano em {alvo.nome}!")
-
-    def ataque_especial(self, alvo):
+    def ataque_especial(self, alvo) -> None:
         dano_total = self.dano + self.forca_especial
-        alvo.saude -= dano_total
-        print(f"{self.nome} usa ataque especial e causa {dano_total} de dano em {alvo.nome}!")
+        print(f"👹 {self.nome} usa ATAQUE ESPECIAL! Causa {dano_total} de dano.")
+        alvo.defender(dano_total)
+
+    def atacar(self, alvo) -> None:
+        # Ataque normal ou especial, sua escolha de lógica
+        self.ataque_especial(alvo)
+    def esta_vivo(self) -> bool:
+        if self.saude <= 0:
+            print(f"👹 {self.nome} foi derrotado!")
+            return False
+        return True

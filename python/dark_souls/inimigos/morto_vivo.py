@@ -1,3 +1,4 @@
+# inimigos/morto_vivo.py
 from .inimigo import Inimigo
 
 class MortoVivo(Inimigo):
@@ -6,11 +7,10 @@ class MortoVivo(Inimigo):
         self.podridao = podridao
         self.velocidade = velocidade
 
-    def atacar(self, alvo):
-        alvo.saude -= self.dano
-        print(f"{self.nome} investe e causa {self.dano} de dano em {alvo.nome}!")
+    def morder(self, alvo) -> None:
+        dano_total = self.dano + self.podridao
+        print(f"🦴 {self.nome} morde {alvo.nome} e causa {dano_total} de dano!")
+        alvo.defender(dano_total)
 
-    def morder(self, alvo):
-        dano_extra = self.dano + self.podridao
-        alvo.saude -= dano_extra
-        print(f"{self.nome} morde e causa {dano_extra} de dano (incluindo {self.podridao} de podridão) em {alvo.nome}!")
+    def atacar(self, alvo) -> None:
+        self.morder(alvo)

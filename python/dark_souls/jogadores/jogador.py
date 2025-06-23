@@ -1,13 +1,28 @@
-# jogadores/jogador.py
+from abc import ABC, abstractmethod
 
-class Jogador:
+class Jogador(ABC):
     def __init__(self, nome, dano):
         self.nome = nome
         self.dano = dano
-        self.saude = 100
+        self.__saude = 100
         self.saude_maxima = 100
-        # → Novo:
         self.efeitos_ativos = []
+
+    @property
+    def saude(self):
+        return self.__saude
+
+    @saude.setter
+    def saude(self, valor):
+        self.__saude = max(0, min(valor, self.saude_maxima))
+
+    @abstractmethod
+    def atacar(self, alvo, dano):
+        pass
+
+    @abstractmethod
+    def defender(self, dano_recebido: int):
+        pass
 
     def adicionar_efeito(self, efeito):
         self.efeitos_ativos.append(efeito)

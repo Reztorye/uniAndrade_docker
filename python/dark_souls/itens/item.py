@@ -1,11 +1,11 @@
+# itens/item.py
 from abc import ABC, abstractmethod
 
-class Item:
-    def __init__(self, nome, tipo):
+class Item(ABC):
+    def __init__(self, nome: str):
         self.nome = nome
-        self.tipo = tipo
 
     @abstractmethod
     def usar(self, alvo):
-        """Define o comportamento ao usar este item."""
+        """Define o efeito do item sobre o alvo."""
         pass

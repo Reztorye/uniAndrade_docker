@@ -2,13 +2,10 @@
 
 from .item import Item
 
-# dark_souls/itens/pocao.py
-
-from .item import Item
-
 class Pocao(Item):
     def __init__(self, nome, cura):
-        super().__init__(nome, tipo="pocao")
+        # Linha corrigida: agora só passamos 'nome', que é o que a classe Item espera.
+        super().__init__(nome)
         self.cura = cura
 
     def usar(self, alvo):

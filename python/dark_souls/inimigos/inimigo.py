@@ -13,10 +13,15 @@ class Inimigo(ABC):
 
     @saude.setter
     def saude(self, valor: int):
-        # ⚠️ Aqui corrigido: atribui diretamente, não soma
-        self.__saude = max(0, valor)
+        self.__saude = max(0, min(valor, 100))
 
     @abstractmethod
     def atacar(self, alvo):
+        """Inflige dano ao alvo."""
         pass
 
+    def defender(self, dano_recebido: int) -> None:
+        self.saude -= dano_recebido
+        print(f"{self.nome} recebeu {dano_recebido} de dano (saúde: {self.saude}/100).")
+    def esta_vivo(self) -> bool:
+        return self.saude > 0

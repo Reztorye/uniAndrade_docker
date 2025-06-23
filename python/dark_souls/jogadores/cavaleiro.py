@@ -9,11 +9,10 @@ class Cavaleiro(Jogador):
     def atacar(self, alvo, dano):
         print(f"{self.nome} golpeia {alvo.nome} causando {dano} de dano!")
         if hasattr(alvo, "saude"):
-            alvo.saude -= dano
-
+            alvo.saude -= dano  # Agora funciona com @property
 
     def defender(self, dano_recebido: int):
         mitigado = min(self.armadura, self.resistencia)
         dano_final = max(0, dano_recebido - mitigado)
-        self.saude -= dano_final
+        self.saude -= dano_final  # Agora usando a propriedade
         print(f"{self.nome} bloqueia {mitigado} de dano. Sofreu {dano_final}. Saúde: {self.saude}")
