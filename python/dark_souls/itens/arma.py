@@ -7,10 +7,8 @@ class Arma(Item):
         self.dano = dano
         self.resistencia = resistencia
 
-    def usar(self, alvo) -> None:
-        print(f"{alvo.nome} ataca com {self.nome} e causa {self.dano} de dano.")
-        alvo.defender(self.dano)
+    def usar(self, usuario) -> None: 
         self.resistencia -= 1
         if self.resistencia <= 0:
             print(f"💥 {self.nome} quebrou!")
-            self.resistencia = 0   
+            self.resistencia = 0
